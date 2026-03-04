@@ -1,0 +1,14 @@
+{
+    "id_counters": {
+        "department": 1,
+        "member": 4,
+        "kpi": 1,
+        "cycle": 1,
+        "performance_record": 1
+    },
+    "departments": [],
+    "members": [],
+    "kpis": [],
+    "cycles": [],
+    "performance_records": []
+}

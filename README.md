@@ -1,75 +1,46 @@
+## Project Name : # OrgPulse ( Organizational Performance Intelligence System )
 
-# project name: Organizational Performance Intelligence System
- -- Overview
+## Project Goal
 
-The Organizational Performance Intelligence System is a command-line based performance governance application designed to simulate real-world organizational KPI management.
+-- OrgPulse is a command-line application that helps organizations manage and evaluate employee performance using KPIs.
 
-The system enables structured performance tracking across departments using weighted KPIs, evaluation cycles, role-based authorization, classification, and analytical insights such as ranking and trend detection.
+-- The system allows departments to define performance indicators, track employee progress during evaluation cycles, and calculate performance results. It provides a structured way to monitor performance and generate insights across departments.
 
-This project is built using clean architecture principles, modular design, and JSON-based persistent storage — without any hard-coded data.
+-- The system has three main users: the system admin, the department manager, and the employee. Each user has specific tasks that help the system function properly.
 
--- Project Objective
 
-The system aims to:
-Manage departments and members within an organization
-Define structured KPIs per department
-Support weighted performance calculations
-Operate using controlled evaluation cycles
-Enforce strict role-based authorization
-Generate performance classification and ranking insights
-Maintain clean code structure and modular separation
-Ensure completeness and consistency across system operations
+## Features & User Stories
 
--- Roles in the System
-- System Admin
-Create departments
-Create evaluation cycles
-Close active cycles
-Create KPIs for any department
-View system-wide reports
-Modify performance records (even after cycle closure)
+### As a System Admin I should be able to do the following:
 
-- Department Manager
-Create members in their department
-Create KPIs for their department
-View department performance reports
-Rank members within their department
-Modify performance records within their department
+- Create departments.
+- Create KPIs for departments.
+- Start evaluation cycles.
+- Close evaluation cycles.
+- View performance results across all departments.
 
-- Employee
-View assigned KPIs
-Record KPI progress during an active cycle
-View personal performance score
-View classification result
-View performance trend across evaluation cycles
 
--- Core Features
-Department Management
-Member Management
-KPI Definition (Core & Optional)
-Weighted Performance Calculation
-Single Active Evaluation Cycle Enforcement
-Performance Record Tracking
-Trend Detection
-Performance Classification (High / Stable / At Risk)
-Department Ranking
-Auto-Increment ID Generation
-JSON Persistent Storage
-Modular Clean Architecture
-Role-Based Authorzation
+### As a Department Manager I should be able to do the following:
 
--- Usage
+- Add employees to my department.
+- Create KPIs for my department.
+- View department performance.
+- Update employee progress if needed.
 
-Example CLI interaction:
+
+### As an Employee I should be able to do the following:
+
+- View assigned KPIs.
+- Record progress for KPIs during active evaluation cycles.
+- View my performance results.
+
+
+## full flow ( usage )
 login
 create_department Sales
 create_member Ahmed --department Sales --role employee
-create_kpi Revenue --weight 40 --type core --department Sales
+create_kpi Revenue --department Sales --weight 40
 create_cycle Q1-2026
 record_progress Ahmed Revenue 75
 view_my_performance
-rank_department Sales
 close_cycle Q1-2026
-logout
-
-The system validates each command based on user role permissions and ensures only one evaluation cycle is active at a time.
