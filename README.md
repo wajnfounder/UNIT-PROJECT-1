@@ -2,7 +2,7 @@
 
 ## Project Goal
 
--- OrgPulse is a command-line application that helps organizations manage and evaluate employee performance using KPIs.
+-- OrgPulse is a command-line that helps organizations manage and evaluate employee performance using KPIs.
 
 -- The system allows departments to define performance indicators, track employee progress during evaluation cycles, and calculate performance results. It provides a structured way to monitor performance and generate insights across departments.
 
