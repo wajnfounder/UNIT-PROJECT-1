@@ -6,13 +6,12 @@ class CycleManager:
     def __init__(self, storage):
         self.storage = storage
 
-
     def create_cycle(self, name):
 
-        # التأكد أنه لا توجد دورة نشطة حالياً
+        # لا يسمح بوجود أكثر من دورة نشطة
         for cycle in self.storage.data["cycles"]:
             if cycle["status"] == "active":
-                return None  # لا يسمح بوجود أكثر من دورة نشطة
+                return None
 
         cycle_id = self.storage.generate_id("cycle")
 
@@ -24,14 +23,12 @@ class CycleManager:
 
         return cycle
 
-
     def list_cycles(self):
 
         return [
             EvaluationCycle.from_dict(cycle)
             for cycle in self.storage.data["cycles"]
         ]
-
 
     def close_cycle(self, cycle_id):
 
@@ -42,7 +39,6 @@ class CycleManager:
                 return True
 
         return False
-
 
     def get_active_cycle(self):
 
