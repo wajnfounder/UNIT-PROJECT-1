@@ -1,50 +1,88 @@
-# Import display helpers
-from cli.display import show_header, show_error, show_info
-
-# Import command parser helper
-from cli.input_handler import parse_input
+from cli.display import show_header, show_info, show_table
+import difflib
 
 
 def start_shell(parser, session):
 
-    # Display system header
+    roles = ["admin", "manager", "employee"]
+
     show_header()
+    show_info("Welcome to OrgPulse!\n")
 
-    
-    show_info("Welcome to OrgPulse!")
-    show_info("Type 'help' to see available commands\n")
+    print("Available roles:")
+    print("  admin")
+    print("  manager")
+    print("  employee\n")
 
-    # Main CLI loop
+    print("Please login with your role to continue\n")
+
+    # Login loop
     while True:
+        try:
+            username = input("Username: ").strip().lower()
 
-        # Get current user from session
-        username = session.get_username()
+            if username == "":
+                continue
 
-        # Build command prompt
-        if username:
-            prompt = f"orgpulse({username}) > "
-        else:
-            prompt = "orgpulse > "
+            if username in roles:
+                parser.auth_manager.login(username)
+                print(f"\nLogin successful ({username})\n")
 
-        # Read user command
-        command = input(prompt).strip()
+                show_table(
+                    "Quick Commands",
+                    ["Command", "Description"],
+                    [
+                        ("help", "Show commands"),
+                        ("exit", "Exit system")
+                    ]
+                )
 
-        # Ignore empty input
-        if command == "":
+                break
+
+            suggestion = difflib.get_close_matches(username, roles, n=1)
+
+            if suggestion:
+                print(f"Invalid username. Did you mean: {suggestion[0]} ?\n")
+            else:
+                print("Invalid username, try again.\n")
+
+        except KeyboardInterrupt:
+            print("\nUse 'exit' to quit.")
             continue
 
-        # Exit command
-        if command == "exit":
-            print("Goodbye good to see you!")
-            break
+    # CLI loop
+    while True:
+        try:
+            prompt = f"{parser.auth_manager.current_user}@orgpulse > "
+            command = input(prompt).strip()
 
-        # Parse command into entity, action, and arguments
-        entity, action, args = parse_input(command)
+            if command == "":
+                continue
 
-        # Handle invalid commands
-        if entity is None:
-            show_error("Invalid command")
+            # ignore VS Code auto commands
+            if command.startswith("&") or "python.exe" in command:
+                continue
+
+            if command.lower() == "exit":
+                print("Exiting OrgPulse...")
+                break
+
+            if command.lower() == "help":
+                parser.handle("help", "", [])
+                continue
+
+            parts = command.split()
+
+            entity = parts[0]
+            action = parts[1] if len(parts) > 1 else ""
+            args = parts[2:] if len(parts) > 2 else []
+
+            parser.handle(entity, action, args)
+
+        except KeyboardInterrupt:
+            print("\nUse 'exit' to quit.")
             continue
 
-        # Send command to parser
-        parser.handle(entity, action, args)
+        except Exception:
+            continue
+        

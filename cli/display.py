@@ -1,3 +1,4 @@
+# Rich library used for styling CLI output
 from rich.console import Console
 from rich.panel import Panel
 from rich.align import Align
@@ -24,31 +25,29 @@ def show_header():
     )
 
 
-# Show normal information message
+# Display normal information messages
 def show_info(message):
     console.print(message)
 
 
-# Show error message
+# Display error messages in red
 def show_error(message):
-    console.print(f"[bold red]Error:[/bold red] {message}")
+    console.print(f"[red]{message}[/red]")
 
 
-# Show success message
+# Display success messages in green
 def show_success(message):
-    console.print(f"[bold green]{message}[/bold green]")
+    console.print(f"[green]{message}[/green]")
 
 
-# Show table (for listing data)
-def show_table(title, columns, rows):
+# Display tables
+def show_table(title, headers, rows):
 
     table = Table(title=title)
 
-    # Add columns
-    for column in columns:
-        table.add_column(column, style="cyan")
+    for header in headers:
+        table.add_column(header)
 
-    # Add rows
     for row in rows:
         table.add_row(*[str(item) for item in row])
 
