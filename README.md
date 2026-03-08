@@ -1,12 +1,12 @@
-# OrgPulse
+## Project Name:
 
-- Organizational Performance Intelligence System -
+OrgPulse
+Organizational Performance Intelligence System.
 
 ## Overview
 
 
 OrgPulse is a command-line system for managing and tracking organizational performance using KPIs. It allows departments, employees, and performance progress to be organized and monitored during evaluation cycles.
-
 
 ---
 
@@ -24,6 +24,11 @@ Users must log in with one of these roles before using the system.
 
 ## Features
 
+### Authentication
+
+* User login system
+* Role-based access control (Admin, Manager, Employee)
+
 ### Department Management
 
 * Create departments
@@ -31,13 +36,13 @@ Users must log in with one of these roles before using the system.
 
 ### Member Management
 
-* Add employees or managers
+* Create employees or managers
 * View all members
 
 ### KPI Management
 
 * Create KPIs for departments
-* List department KPIs
+* View all KPIs
 
 ### Evaluation Cycles
 
@@ -46,29 +51,34 @@ Users must log in with one of these roles before using the system.
 
 ### Performance Tracking
 
-* Record KPI progress
 * View performance records
-* Generate performance reports
 * AI-based performance analysis
 
----
+### Task Management
+
+* Add tasks linked to KPIs
+* View tasks
+
 
 ## CLI Usage Example
 
 Example flow of using the system:
 
 ```
-Username: admin
+login admin
 
-admin@orgpulse > department create Sales
-admin@orgpulse > member create Ahmed manager 1
-admin@orgpulse > kpi create Revenue 100000 40 growth 1
-admin@orgpulse > cycle create Q1_2026
-admin@orgpulse > performance record 1 1 1 80
-admin@orgpulse > performance report
+department create Sales
+member create Ahmed manager 1
+kpi create Revenue 100000 40 growth 1
+cycle create Q1_2026
+
+task add 1 Complete monthly report
+task list
+
+performance list
+performance ai
+
 ```
-
----
 
 ## Commands
 
@@ -85,18 +95,21 @@ admin@orgpulse > performance report
 | cycle create       | Create evaluation cycle  |
 | cycle list         | List cycles              |
 | performance record | Record KPI progress      |
-| performance list   | List performance records |
 | performance report | Show performance summary |
 | performance ai     | AI performance insights  |
+| task add           | Add a task linked to KPI |
+| task list          | List task                |
+
 
 ---
 
 ## Technologies Used
 
-* **Python**
-* **CLI Interface**
-* **Modular Architecture**
-* **Role-Based Access Control (RBAC)**
+* Python *
+* CLI Interface *
+* JSON Data Storage *
+* Modular Architecture *
+* Role-Based Access Control (RBAC) *
 
 ---
 
@@ -106,31 +119,44 @@ admin@orgpulse > performance report
 orgpulse/
 │
 ├── cli/
-│   ├── shell.py
+│   ├── command_parser.py
 │   ├── display.py
-│   └── help_commands.py
+│   ├── help_commands.py
+│   ├── input_handler.py
+│   ├── session.py
+│   └── shell.py
 │
 ├── managers/
-│   ├── department_manager.py
-│   ├── member_manager.py
-│   ├── kpi_manager.py
+│   ├── authorization_manager.py
 │   ├── cycle_manager.py
-│   └── performance_manager.py
+│   ├── department_manager.py
+│   ├── kpi_manager.py
+│   ├── member_manager.py
+│   ├── performance_manager.py
+│   ├── storage_manager.py
+│   └── task_manager.py
 │
 ├── models/
 │   ├── department.py
-│   ├── member.py
+│   ├── evaluation_cycle.py
 │   ├── kpi.py
-│   ├── cycle.py
+│   ├── member.py
 │   └── performance_record.py
 │
 ├── services/
 │   └── ai_analysis.py
 │
-└── main.py
-```
+├── data/
+│   └── data.json
+│
+├── main.py
+├── .env
+├── .gitignore
+└── README.md
 
----
+```
 
 ## Author
 Developed as part of a Python CLI project.
+
+```
