@@ -2,8 +2,6 @@
 
 - Organizational Performance Intelligence System -
 
----
-
 ## Overview
 
 
@@ -16,9 +14,9 @@ OrgPulse is a command-line system for managing and tracking organizational perfo
 
 The system supports three user roles:
 
-* **Admin** – Full system control
-* **Manager** – Department management
-* **Employee** – Personal performance tracking
+* Admin * – Full system control.
+* Manager * – Department management.
+* Employee * – Personal performance tracking.
 
 Users must log in with one of these roles before using the system.
 
