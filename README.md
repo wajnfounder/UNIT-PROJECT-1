@@ -1,24 +1,24 @@
-## Project Name:
+## Project Name
 
-OrgPulse
-Organizational Performance Intelligence System.
+ OrgPulse
+Organizational Performance Intelligence System
 
 ## Overview
 
-
-OrgPulse is a command-line system for managing and tracking organizational performance using KPIs. It allows departments, employees, and performance progress to be organized and monitored during evaluation cycles.
+OrgPulse is a command-line interface (CLI) system designed to manage and track organizational performance using Key Performance Indicators (KPIs).
+The system enables organizations to organize departments, manage employees, monitor KPI progress, and evaluate performance across defined evaluation cycles.
 
 ---
 
 ## System Roles
 
-The system supports three user roles:
+The system supports three main user roles:
 
-* Admin * – Full system control.
-* Manager * – Department management.
-* Employee * – Personal performance tracking.
+* Admin – Full system control
+* Manager – Department and KPI management
+* Employee – Personal performance tracking
 
-Users must log in with one of these roles before using the system.
+Users must log in with one of these roles before accessing the system.
 
 ---
 
@@ -59,12 +59,14 @@ Users must log in with one of these roles before using the system.
 * Add tasks linked to KPIs
 * View tasks
 
+---
 
 ## CLI Usage Example
 
 Example flow of using the system:
 
-```
+```bash
+
 login admin
 
 department create Sales
@@ -77,8 +79,9 @@ task list
 
 performance list
 performance ai
-
 ```
+
+---
 
 ## Commands
 
@@ -98,18 +101,33 @@ performance ai
 | performance report | Show performance summary |
 | performance ai     | AI performance insights  |
 | task add           | Add a task linked to KPI |
-| task list          | List task                |
-
+| task list          | List tasks               |
 
 ---
 
 ## Technologies Used
 
-* Python *
-* CLI Interface *
-* JSON Data Storage *
-* Modular Architecture *
-* Role-Based Access Control (RBAC) *
+* Python
+* CLI Interface
+* JSON Data Storage
+* Modular Architecture
+* Role-Based Access Control (RBAC)
+* Rich Library for CLI styling
+* OpenAI API for AI performance analysis
+
+---
+
+## Project Architecture
+
+The project follows a **modular layered architecture**:
+
+* models  – Data structures representing system entities
+* managers  – Business logic and system operations
+* services – External integrations (AI analysis)
+* cli  – Command parsing and CLI interface
+* storage  – JSON data persistence
+
+This structure keeps the code organized, scalable, and maintainable.
 
 ---
 
@@ -153,10 +171,18 @@ orgpulse/
 ├── .env
 ├── .gitignore
 └── README.md
-
 ```
+
+---
+
+## Running the Project
+
+```bash
+python main.py
+```
+
+---
 
 ## Author
-Developed as part of a Python CLI project.
 
-```
+Developed as part of a Python CLI project.  
