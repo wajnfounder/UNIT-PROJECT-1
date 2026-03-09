@@ -185,4 +185,4 @@ python main.py
 
 ## Author
 
-Developed as part of a Python CLI project.  
+Developed as part of a Python CLI project.
