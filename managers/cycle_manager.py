@@ -3,12 +3,14 @@ from models.evaluation_cycle import EvaluationCycle
 
 class CycleManager:
 
+    # Initialize the manager with the storage system
     def __init__(self, storage):
         self.storage = storage
 
+    # Create a new evaluation cycle (only one active cycle is allowed)
     def create_cycle(self, name):
 
-        # لا يسمح بوجود أكثر من دورة نشطة
+        # Ensure there is no other active cycle
         for cycle in self.storage.data["cycles"]:
             if cycle["status"] == "active":
                 return None
@@ -23,15 +25,15 @@ class CycleManager:
 
         return cycle
 
+    # Return all cycles as EvaluationCycle objects
     def list_cycles(self):
-
         return [
             EvaluationCycle.from_dict(cycle)
             for cycle in self.storage.data["cycles"]
         ]
 
+    # Close an active cycle by updating its status
     def close_cycle(self, cycle_id):
-
         for cycle in self.storage.data["cycles"]:
             if cycle["id"] == cycle_id:
                 cycle["status"] = "closed"
@@ -40,8 +42,8 @@ class CycleManager:
 
         return False
 
+    # Retrieve the currently active cycle
     def get_active_cycle(self):
-
         for cycle in self.storage.data["cycles"]:
             if cycle["status"] == "active":
                 return EvaluationCycle.from_dict(cycle)

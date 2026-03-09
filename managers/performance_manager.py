@@ -3,14 +3,15 @@ from models.performance_record import PerformanceRecord
 
 class PerformanceManager:
 
+    # Initialize the manager with storage and KPI manager
     def __init__(self, storage, kpi_manager):
         self.storage = storage
         self.kpi_manager = kpi_manager
 
-
+    # Record KPI progress for a member within a specific cycle
     def record_progress(self, member_id, kpi_id, cycle_id, actual):
 
-        # Get KPI to read target
+        # Retrieve KPI to access its target value
         kpi = self.kpi_manager.get_kpi(kpi_id)
 
         if not kpi:
@@ -18,7 +19,7 @@ class PerformanceManager:
 
         target = kpi.target
 
-        # Calculate progress automatically
+        # Calculate progress percentage automatically
         progress = (actual / target) * 100
 
         record_id = self.storage.generate_id("performance_record")
@@ -38,9 +39,8 @@ class PerformanceManager:
 
         return record
 
-
+    # Return all performance records as objects
     def list_records(self):
-
         records = self.storage.data["performance_records"]
 
         return [
@@ -48,16 +48,15 @@ class PerformanceManager:
             for record in records
         ]
 
-
+    # Retrieve all records for a specific member
     def get_member_records(self, member_id):
-
         return [
             PerformanceRecord.from_dict(record)
             for record in self.storage.data["performance_records"]
             if record["member_id"] == member_id
         ]
 
-
+    # Generate a simple performance summary report
     def generate_report(self):
 
         records = self.storage.data["performance_records"]
