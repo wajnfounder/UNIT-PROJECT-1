@@ -1,7 +1,7 @@
 # OrgPulse
 Organizational Performance Intelligence System
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Python](https://img.shields.io/badge/Python-3.14-blue)
 ![CLI](https://img.shields.io/badge/Interface-CLI-green)
 ![Architecture](https://img.shields.io/badge/Architecture-Modular-orange)
 ![Status](https://img.shields.io/badge/Project-Completed-success)
@@ -69,7 +69,7 @@ Users must log in with one of these roles before accessing the system.
 ### Task Management
 - Add tasks linked to KPIs
 - View tasks
-- Complete tasks and update KPI progress automatically
+- View tasks status
 
 ---
 
@@ -209,6 +209,7 @@ python-dotenv openai
 Run the system using:
 
 ```bash
+pip install -r requirements.txt
 
 python main.py
 
