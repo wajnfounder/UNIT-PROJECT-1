@@ -1,52 +1,55 @@
-# Rich library used for styling CLI output
 from rich.console import Console
 from rich.panel import Panel
 from rich.align import Align
 from rich.table import Table
 
-# Create console instance
 console = Console()
 
 
-# Display system header
+# Header
 def show_header():
 
-    header_text = (
-        "OrgPulse\n"
-        "Organizational Performance Tracking System"
-    )
+    title = "[bold cyan]ORG PULSE CLI[/bold cyan]"
+    subtitle = "[dim]Organizational Performance Tracking System[/dim]"
+
+    header = f"{title}\n{subtitle}"
 
     console.print(
         Panel(
-            Align.center(header_text),
-            border_style="blue",
-            expand=False
+            Align.center(header),
+            border_style="cyan",
+            padding=(1, 8)
         )
     )
 
 
-# Display normal information messages
+# Info message
 def show_info(message):
-    console.print(message)
+    console.print(f"[cyan]{message}[/cyan]")
 
 
-# Display error messages in red
+# Error message
 def show_error(message):
-    console.print(f"[red]{message}[/red]")
+    console.print(f"[bold red]✖ {message}[/bold red]")
 
 
-# Display success messages in green
+# Success message
 def show_success(message):
-    console.print(f"[green]{message}[/green]")
+    console.print(f"[bold green]✔ {message}[/bold green]")
 
 
-# Display tables
+# Table display
 def show_table(title, headers, rows):
 
-    table = Table(title=title)
+    table = Table(
+        title=f"[bold cyan]{title}[/bold cyan]",
+        header_style="bold cyan",
+        border_style="cyan",
+        show_lines=False
+    )
 
     for header in headers:
-        table.add_column(header)
+        table.add_column(header, style="white")
 
     for row in rows:
         table.add_row(*[str(item) for item in row])

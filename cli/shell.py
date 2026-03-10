@@ -1,27 +1,28 @@
 from cli.display import show_header, show_info, show_table
 import difflib
+from colorama import Fore, Style
 
 
-def start_shell(parser, session):
+def start_shell(parser):
 
     roles = ["admin", "manager", "employee"]
 
     show_header()
     show_info("Welcome to OrgPulse!\n")
 
-    print("Available roles:")
-    print("  admin")
-    print("  manager")
-    print("  employee\n")
+    show_info("Available roles:")
+    print(" • admin")
+    print(" • manager")
+    print(" • employee\n")
 
-    print("Please login with your role to continue\n")
+    print(Fore.BLUE + "Please login with your role to continue" + Style.RESET_ALL)
 
-    # Login loop
+    # LOGIN LOOP
     while True:
         try:
             username = input("Username: ").strip().lower()
 
-            if username == "":
+            if not username:
                 continue
 
             if username in roles:
@@ -42,7 +43,7 @@ def start_shell(parser, session):
             suggestion = difflib.get_close_matches(username, roles, n=1)
 
             if suggestion:
-                print(f"Invalid username. Did you mean: {suggestion[0]} ?\n")
+                print(f"Invalid username. Did you mean: {suggestion[0]}?\n")
             else:
                 print("Invalid username, try again.\n")
 
@@ -50,16 +51,18 @@ def start_shell(parser, session):
             print("\nUse 'exit' to quit.")
             continue
 
-    # CLI loop
+    # MAIN CLI LOOP
     while True:
         try:
-            prompt = f"{parser.auth_manager.current_user}@orgpulse > "
+            current_user = parser.auth_manager.current_user
+            prompt = f"\033[92m{current_user}\033[0m@orgpulse > "
+
             command = input(prompt).strip()
 
-            if command == "":
+            if not command:
                 continue
 
-            # ignore VS Code auto commands
+            # Ignore VS Code auto commands
             if command.startswith("&") or "python.exe" in command:
                 continue
 
@@ -82,7 +85,3 @@ def start_shell(parser, session):
         except KeyboardInterrupt:
             print("\nUse 'exit' to quit.")
             continue
-
-        except Exception:
-            continue
-        

@@ -1,4 +1,6 @@
 class KPI:
+
+    # Initialize a KPI with its main attributes
     def __init__(self, kpi_id: int, name: str, target: float, weight: int, kpi_type: str, department_id: int):
         self.id = kpi_id
         self.name = name
@@ -7,7 +9,8 @@ class KPI:
         self.type = kpi_type
         self.department_id = department_id
 
-    def to_dict(self):
+    # Convert the KPI object into a dictionary for storage (JSON)
+    def to_dict(self) -> dict:
         return {
             "id": self.id,
             "name": self.name,
@@ -17,6 +20,7 @@ class KPI:
             "department_id": self.department_id
         }
 
+    # Create a KPI object from dictionary data
     @staticmethod
     def from_dict(data: dict):
         return KPI(
@@ -27,4 +31,3 @@ class KPI:
             kpi_type=data["type"],
             department_id=data["department_id"]
         )
-    

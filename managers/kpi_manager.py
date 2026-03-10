@@ -9,6 +9,7 @@ class KPIManager:
 
     # Create a new KPI and store it in the system
     def create_kpi(self, name, target, weight, kpi_type, department_id):
+
         kpi_id = self.storage.generate_id("kpi")
 
         kpi = KPI(kpi_id, name, target, weight, kpi_type, department_id)
@@ -21,15 +22,14 @@ class KPIManager:
 
     # Return all KPIs as KPI objects
     def list_kpis(self):
+
         kpis = self.storage.data["kpis"]
 
-        return [
-            KPI.from_dict(kpi)
-            for kpi in kpis
-        ]
+        return [KPI.from_dict(kpi) for kpi in kpis]
 
-    # Retrieve a specific KPI by its ID
+    # Retrieve a specific KPI by ID
     def get_kpi(self, kpi_id):
+
         for kpi in self.storage.data["kpis"]:
             if kpi["id"] == kpi_id:
                 return KPI.from_dict(kpi)

@@ -1,5 +1,15 @@
 class PerformanceRecord:
-    def __init__(self, record_id: int, member_id: int, kpi_id: int, cycle_id: int, progress: int, calculated_score: float = 0):
+
+    # Initialize a performance record linking a member, KPI, and evaluation cycle
+    def __init__(
+        self,
+        record_id: int,
+        member_id: int,
+        kpi_id: int,
+        cycle_id: int,
+        progress: int,
+        calculated_score: float = 0
+    ):
         self.id = record_id
         self.member_id = member_id
         self.kpi_id = kpi_id
@@ -7,7 +17,8 @@ class PerformanceRecord:
         self.progress = progress
         self.calculated_score = calculated_score
 
-    def to_dict(self):
+    # Convert the performance record object into a dictionary for storage (JSON)
+    def to_dict(self) -> dict:
         return {
             "id": self.id,
             "member_id": self.member_id,
@@ -17,6 +28,7 @@ class PerformanceRecord:
             "calculated_score": self.calculated_score
         }
 
+    # Create a PerformanceRecord object from dictionary data
     @staticmethod
     def from_dict(data: dict):
         return PerformanceRecord(

@@ -11,13 +11,15 @@ class PerformanceManager:
     # Record KPI progress for a member within a specific cycle
     def record_progress(self, member_id, kpi_id, cycle_id, actual):
 
-        # Retrieve KPI to access its target value
         kpi = self.kpi_manager.get_kpi(kpi_id)
 
         if not kpi:
             raise ValueError("KPI not found")
 
         target = kpi.target
+
+        if target == 0:
+            raise ValueError("KPI target cannot be zero")
 
         # Calculate progress percentage automatically
         progress = (actual / target) * 100
@@ -41,15 +43,14 @@ class PerformanceManager:
 
     # Return all performance records as objects
     def list_records(self):
+
         records = self.storage.data["performance_records"]
 
-        return [
-            PerformanceRecord.from_dict(record)
-            for record in records
-        ]
+        return [PerformanceRecord.from_dict(record) for record in records]
 
     # Retrieve all records for a specific member
     def get_member_records(self, member_id):
+
         return [
             PerformanceRecord.from_dict(record)
             for record in self.storage.data["performance_records"]
@@ -76,11 +77,9 @@ class PerformanceManager:
 
         average_progress = total_progress / len(records)
 
-        report = {
+        return {
             "total_records": len(records),
             "average_progress": round(average_progress, 2),
             "top_member": top_record["member_id"],
             "top_progress": top_record["progress"]
         }
-
-        return report
